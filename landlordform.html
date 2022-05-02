@@ -29,6 +29,185 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
 
+
+    <link rel="stylesheet" type="text/css" href="formcss/smart-forms.css">
+    <link rel="stylesheet" type="text/css" href="formcss/smart-addons.css">
+    <link rel="stylesheet" type="text/css" href="formcss/font-awesome.min.css">
+
+    <script type="text/javascript" src="formjs/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="formjs/jquery.steps.min.js"></script>
+    <script type="text/javascript" src="formjs/jquery-ui-custom.min.js"></script>
+    <script type="text/javascript" src="formjs/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="formjs/additional-methods.min.js"></script>
+    <script type="text/javascript" src="formjs/jquery-ui-slider-pips.min.js"></script>
+    <script type="text/javascript" src="formjs/jquery-ui-touch-punch.min.js"></script>
+    <script type="text/javascript" src="formjs/jquery.formShowHide.min.js"></script>
+
+
+
+
+
+
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+
+            $("#smart-form").steps({
+                bodyTag: "fieldset",
+                headerTag: "h2",
+                bodyTag: "fieldset",
+                transitionEffect: "slideLeft",
+                titleTemplate: "<span class='number'>#index#</span> #title#",
+                labels: {
+                    finish: "Submit Form",
+                    next: "Continue",
+                    previous: "Go Back",
+                    loading: "Loading..."
+                },
+                onStepChanging: function(event, currentIndex, newIndex) {
+                    if (currentIndex > newIndex) {
+                        return true;
+                    }
+                    var form = $(this);
+                    if (currentIndex < newIndex) {}
+                    return form.valid();
+                },
+                onStepChanged: function(event, currentIndex, priorIndex) {},
+                onFinishing: function(event, currentIndex) {
+                    var form = $(this);
+                    form.validate().settings.ignore = ":disabled";
+                    return form.valid();
+                },
+                onFinished: function(event, currentIndex) {
+                    var form = $(this);
+                }
+            }).validate({
+                errorClass: "state-error",
+                validClass: "state-success",
+                errorElement: "em",
+                onkeyup: false,
+                onclick: false,
+                rules: {
+                    firstname: {
+                        required: true
+                    },
+                    emailaddress: {
+                        required: true
+                    },
+                    telephone: {
+                        required: true,
+                        number: true
+                    },
+                    lastname: {
+                        required: true
+                    },
+                    project_title: {
+                        required: true
+                    },
+                    contact_person: {
+                        required: true
+                    },
+                    generalTerms: {
+                        required: true
+                    }
+                },
+                messages: {
+                    firstname: {
+                        required: "Please enter firstname"
+                    },
+                    lastname: {
+                        required: "Please enter lastname"
+                    },
+                    emailaddress: {
+                        required: 'Please enter email'
+                    },
+                    telephone: {
+                        required: 'Please enter telephone',
+                        number: 'Please enter numbers only'
+                    },
+                    project_title: {
+                        required: "Please enter the project title"
+                    },
+                    contact_person: {
+                        required: 'Please enter contact person'
+                    },
+                    generalTerms: {
+                        required: 'Please agree to our terms'
+                    }
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).closest('.field').addClass(errorClass).removeClass(validClass);
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).closest('.field').removeClass(errorClass).addClass(validClass);
+                },
+                errorPlacement: function(error, element) {
+                    if (element.is(":radio") || element.is(":checkbox")) {
+                        element.closest('.option-group').after(error);
+                    } else {
+                        error.insertAfter(element.parent());
+                    }
+                }
+
+            });
+
+            /* Project datepicker range
+            ----------------------------------------------- */
+            $("#start_date").datepicker({
+                defaultDate: "+1w",
+                changeMonth: false,
+                numberOfMonths: 1,
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                onClose: function(selectedDate) {
+                    $("#end_date").datepicker("option", "minDate", selectedDate);
+                }
+            });
+
+            $("#end_date").datepicker({
+                defaultDate: "+1w",
+                changeMonth: false,
+                numberOfMonths: 1,
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                onClose: function(selectedDate) {
+                    $("#start_date").datepicker("option", "maxDate", selectedDate);
+                }
+            });
+
+            /* The budget slider 
+            ------------------------------------------------------ */
+            $("#budget_slider").slider({
+                range: "min",
+                animate: true,
+                value: 1000,
+                min: 500,
+                max: 3000,
+                step: 500,
+                slide: function(event, ui) {
+                    $("#budget").val("$" + ui.value);
+                }
+            });
+
+            $("#budget").val("$" + $("#budget_slider").slider("value"));
+            $("#budget_slider").slider("pips", {
+                rest: "label",
+                prefix: "$",
+                suffix: ""
+            });
+            $("#budget_slider").slider("float", {
+                prefix: "$",
+                suffix: "",
+                pips: true
+            });
+
+            /* Show hide payment options
+            ------------------------------------------------------- */
+            $('.smartfm-ctrl').formShowHide();
+
+        });
+    </script>
+
+
 </head>
 
 <body>
@@ -60,7 +239,8 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Atom<span>Letting</span></a>
+            <img src="images/logo.png" width="90" height="40">
+            <!-- <a class="navbar-brand" href="index.html">Atom<span>Letting</span></a> -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -131,27 +311,429 @@
 
 
 
+    <div class="inner-banner pt-29 pt-lg-30 pb-9 pb-lg-12 bg-default-6">
+        <div class="container">
+            <div class="row  justify-content-center pt-5">
+                <div class="col-xl-8 col-lg-9">
+                    <div class="px-md-15 text-center">
+                        <h1 class="title gr-text-2 mb-8 mb-lg-10">Landlord Application</h1>
+                        <!-- <p class="gr-text-7 mb-0 mb-lg-13">Effective date: 2022-05-01</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="smart-wrap">
+        <div class="smart-forms smart-container wrap-1">
+
+            <div class="form-body smart-steps steps-progress">
+                <form method="post" action="php/formprocess.php" id="smart-form">
+                    <h2>Client Status</h2>
+                    <fieldset>
+
+                        <div class="frm-row">
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="text" name="firstname" id="firstname" class="gui-input" placeholder="First name">
+                                            <span class="field-icon"><i class="fa fa-user"></i></span>  
+                                        </label>
+                            </div>
+                            <!-- end section -->
+
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="text" name="lastname" id="lastname" class="gui-input" placeholder="Last name">
+                                            <span class="field-icon"><i class="fa fa-user"></i></span>  
+                                        </label>
+                            </div>
+                            <!-- end section -->
+                        </div>
+
+                        <div class="frm-row">
+                            <div class="section colm colm6">
+                                <label class="field select">
+                                          <select id="masterCardMonth" name="masterCardMonth">
+                                              <option value="">Current Client</option>
+                                              <option value="01">Yes</option>
+                                              <option value="01">No</option>
+                                          </select>
+                                          <i class="arrow double"></i>                             
+                                      </label>
+                            </div>
+                            <!-- end section -->
+
+                            <div class="section colm colm6">
+                                <label class="field select">
+                                        <select id="masterCardYear" name="masterCardYear">
+                                            <option value="">Residency</option>
+                                            <option value="United Kingdom">United Kingdom</option>
+                                            <option value="Canada">Canada</option>
+                                            
+                                        </select>
+                                        <i class="arrow double"></i>                   
+                                      </label>
+                            </div>
+                            <!-- end section -->
+                        </div>
+                        <!-- end .frm-row section -->
+
+                        <div class="frm-row">
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="email" name="emailaddress" id="emailaddress" class="gui-input" placeholder="Email address">
+                                            <span class="field-icon"><i class="fa fa-envelope"></i></span>  
+                                        </label>
+                            </div>
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                          <input type="email" name="emailaddress" id="emailaddress" class="gui-input" placeholder="Work address">
+                                          <span class="field-icon"><i class="fa fa-envelope"></i></span>  
+                                      </label>
+                            </div>
+                            <!-- end section -->
+
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="tel" name="telephone" id="telephone" class="gui-input" placeholder="Telephone number">
+                                            <span class="field-icon"><i class="fa fa-phone-square"></i></span>  
+                                        </label>
+                            </div>
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                          <input type="tel" name="telephone" id="telephone" class="gui-input" placeholder="Home number">
+                                          <span class="field-icon"><i class="fa fa-phone-square"></i></span>  
+                                      </label>
+                            </div>
+                            <!-- end section -->
+                        </div>
+                        <!-- end .frm-row section -->
+
+                        <div class="section">
+                            <label class="field prepend-icon">
+                                        <textarea class="gui-textarea" id="selfdetails" name="selfdetails" placeholder="Address"></textarea>
+                                        <span class="field-icon"><i class="fa fa-comments"></i></span>
+                                        <span class="input-hint"> 
+                                            <strong>Home Address:</strong> add mutiple address if applicable
+                                        </span>   
+                                    </label>
+                        </div>
+                        <!-- end section -->
+
+                    </fieldset>
+
+                    <h2>Landlord Reg.</h2>
+                    <fieldset>
+
+                        <div class="frm-row">
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="text" name="project_title" id="project_title" class="gui-input" placeholder="Landlord owned property">
+                                            <span class="field-icon"><i class="fa fa-line-chart"></i></span>  
+                                        </label>
+                            </div>
+                            <!-- end section -->
+
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="text" name="contact_person" id="contact_person" class="gui-input" placeholder="Landlord registration numbers">
+                                            <span class="field-icon"><i class="fa fa-male"></i></span>  
+                                        </label>
+                            </div>
+                            <!-- end section -->
+                        </div>
+                        <!-- end frm-row section -->
+
+                        <div class="frm-row">
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="text" name="start_date" id="start_date" class="gui-input" placeholder="Landlord registration expiry">
+                                            <span class="field-icon"><i class="fa fa-calendar"></i></span>  
+                                        </label>
+                            </div>
+                            <!-- end section -->
+
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="text" name="end_date" id="end_date" class="gui-input" placeholder="Council area">
+                                            <span class="field-icon"><i class="fa fa-calendar-o"></i></span>  
+                                        </label>
+                            </div>
+                            <!-- end section -->
+                        </div>
+                        <!-- end frm-row section -->
+
+                        <!-- <div class="section spacer-b40">
+                            <div class="spacer-b15">
+                                <label for="amount">Project Budget:</label>
+                                <input type="text" id="budget" class="slider-input">
+                            </div>
+                           
+                            <div class="slider-wrapper blue-slider">
+                                <div id="budget_slider"></div>
+                            </div>
+                           
+                        </div> -->
+                        <!-- end section -->
+
+                        <!-- <div class="section">
+                            <label class="field prepend-icon">
+                                        <textarea class="gui-textarea" id="projectdetails" name="projectdetails" placeholder="Project details"></textarea>
+                                        <span class="field-icon"><i class="fa fa-comments"></i></span>
+                                        <span class="input-hint"> 
+                                            <strong>Project Details:</strong> add more project specific details
+                                        </span>   
+                                    </label>
+                        </div> -->
+                        <!-- end section -->
+
+                    </fieldset>
+
+                    <h2>Bank Details</h2>
+                    <fieldset>
+
+                        <div class="section">
+                            <p class="small-text fine-grey">Please enter your preferred bank below </p>
+                        </div>
+                        <!-- end section -->
+
+                        <!-- <div class="section">
+                            <div class="option-group field">
+                                <label class="option">
+                                            <input type="radio" name="payment" value="Visa" class="smartfm-ctrl" data-show-id="ctr_visa" checked>
+                                            <span class="radio"></span> 
+                                            <i class="fa fa-credit-card"></i> Visa                 
+                                        </label>
+                                <label class="option">
+                                            <input type="radio" name="payment" value="Master Card" class="smartfm-ctrl" data-show-id="ctr_mastercard">
+                                            <span class="radio"></span> 
+                                            <i class="fa fa-credit-card"></i> Master Card                  
+                                        </label>
+                                <label class="option">
+                                            <input type="radio" name="payment" id="ppal" value="Pay Pal" class="smartfm-ctrl" data-show-id="ctr_paypal">
+                                            <span class="radio"></span> 
+                                            <i class="fa fa-paypal"></i> Paypal Credit               
+                                        </label>
+                            </div>
+                        </div> -->
+                        <!-- end section -->
 
 
 
 
 
+                        <div id="ctr_paypal" class="hiddenbox">
+                            <div class="frm-row">
+                                <div class="section colm colm6">
+                                    <label class="field prepend-icon">
+                                                <input type="text" name="ppName" id="ppName" class="gui-input" placeholder="Account Holder's name">
+                                                <span class="field-icon"><i class="fa fa-user"></i></span>  
+                                            </label>
+                                </div>
+                                <!-- end section -->
 
+                                <div class="section colm colm6">
+                                    <label class="field prepend-icon">
+                                                <input type="text" name="ppName2" id="ppName2" class="gui-input" placeholder="Bank name">
+                                                <span class="field-icon"><i class="fa fa-user"></i></span>   
+                                            </label>
+                                </div>
+                                <!-- end section -->
+                            </div>
+                            <!-- end frm-row section -->
 
+                            <div class="frm-row">
+                                <div class="section colm colm6">
+                                    <label class="field prepend-icon">
+                                                <input type="text" name="ppAddress1" id="ppAddress1" class="gui-input" placeholder="Bank Address line 1">
+                                                <span class="field-icon"><i class="fa fa-map-marker"></i></span>  
+                                            </label>
+                                </div>
+                                <!-- end section -->
 
+                                <div class="section colm colm6">
+                                    <label class="field prepend-icon">
+                                                <input type="text" name="ppAddress1" id="ppAddress2" class="gui-input" placeholder="Branch Address line 2">
+                                                <span class="field-icon"><i class="fa fa-map-marker"></i></span>  
+                                            </label>
+                                </div>
+                                <!-- end section -->
+                            </div>
+                            <!-- end frm-row section -->
 
+                            <div class="frm-row">
 
+                                <div class="section colm colm4">
+                                    <label class="field prepend-icon">
+                                                <input type="text" name="ppCity" id="ppCity" class="gui-input" placeholder="Sort Code">
+                                                <span class="field-icon"><i class="fa fa-building"></i></span>  
+                                            </label>
+                                </div>
+                                <!-- end section -->
 
+                                <div class="section colm colm4">
+                                    <label class="field prepend-icon">
+                                                <input type="text" name="ppZip" id="ppZip" class="gui-input" placeholder="IBAN">
+                                                <span class="field-icon"><i class="fa fa-lock"></i></span>  
+                                            </label>
+                                </div>
+                                <!-- end section -->
 
+                                <div class="section colm colm4">
+                                    <label class="field select">
+                                                <select id="ppState" name="ppState">
+                                                    <option value="">Select Country</option>
+                                                    <option value="AL">Alabama</option>
+                                                    <option value="AK">Alaska</option>
+                                                    <option value="AZ">Arizona</option>
+                                                    <option value="AR">Arkansas</option>
+                                                    <option value="CA">California</option>
+                                                    <option value="CO">Colorado</option>
+                                                    <option value="CT">Connecticut</option>
+                                                    <option value="DE">Delaware</option>
+                                                    <option value="DC">District Of Columbia</option>
+                                                    <option value="FL">Florida</option>
+                                                    <option value="GA">Georgia</option>
+                                                    <option value="HI">Hawaii</option>
+                                                    <option value="ID">Idaho</option>
+                                                    <option value="IL">Illinois</option>
+                                                    <option value="IN">Indiana</option>
+                                                    <option value="IA">Iowa</option>
+                                                    <option value="KS">Kansas</option>
+                                                    <option value="KY">Kentucky</option>
+                                                    <option value="LA">Louisiana</option>
+                                                    <option value="ME">Maine</option>
+                                                    <option value="MD">Maryland</option>
+                                                    <option value="MA">Massachusetts</option>
+                                                    <option value="MI">Michigan</option>
+                                                    <option value="MN">Minnesota</option>
+                                                    <option value="MS">Mississippi</option>
+                                                    <option value="MO">Missouri</option>
+                                                    <option value="MT">Montana</option>
+                                                    <option value="NE">Nebraska</option>
+                                                    <option value="NV">Nevada</option>
+                                                    <option value="NH">New Hampshire</option>
+                                                    <option value="NJ">New Jersey</option>
+                                                    <option value="NM">New Mexico</option>
+                                                    <option value="NY">New York</option>
+                                                    <option value="NC">North Carolina</option>
+                                                    <option value="ND">North Dakota</option>
+                                                    <option value="OH">Ohio</option>
+                                                    <option value="OK">Oklahoma</option>
+                                                    <option value="OR">Oregon</option>
+                                                    <option value="PA">Pennsylvania</option>
+                                                    <option value="RI">Rhode Island</option>
+                                                    <option value="SC">South Carolina</option>
+                                                    <option value="SD">South Dakota</option>
+                                                    <option value="TN">Tennessee</option>
+                                                    <option value="TX">Texas</option>
+                                                    <option value="UT">Utah</option>
+                                                    <option value="VT">Vermont</option>
+                                                    <option value="VA">Virginia</option>
+                                                    <option value="WA">Washington</option>
+                                                    <option value="WV">West Virginia</option>
+                                                    <option value="WI">Wisconsin</option>
+                                                    <option value="WY">Wyoming</option>
+                                                </select>
+                                                <i class="arrow double"></i>
+                                            </label>
+                                </div>
+                                <!-- end section -->
+                            </div>
+                            <!-- end frm-row section -->
 
+                            <div class="frm-row">
+                                <div class="section colm colm6">
+                                    <label class="field prepend-icon">
+                                                <input type="text" name="ppPhone" id="ppPhone" class="gui-input" placeholder="SWIFT Address">
+                                                <span class="field-icon"><i class="fa fa-phone-square"></i></span>  
+                                            </label>
+                                </div>
+                                <!-- end section -->
 
+                                <div class="section colm colm6">
+                                    <label class="field prepend-icon">
+                                                <input type="text" name="ppEmail" id="ppEmail" class="gui-input" placeholder="Landlord VAT">
+                                                <span class="field-icon"><i class="fa fa-envelope"></i></span>   
+                                            </label>
+                                </div>
+                                <!-- end section -->
+                            </div>
+                            <!-- end frm-row section -->
 
+                            <div class="frm-row">
+                                <div class="section colm colm6">
+                                    <label class="field prepend-icon">
+                                                <input type="password" name="ppPass" id="ppPass" class="gui-input" placeholder="Choose a Payment method">
+                                                <span class="field-icon"><i class="fa fa-lock"></i></span>  
+                                            </label>
+                                </div>
+                                <!-- end section -->
 
+                                <div class="section colm colm6">
+                                    <label class="field prepend-icon">
+                                                <input type="password" name="ppPass2" id="ppPass2" class="gui-input" placeholder="Building Society roll number">
+                                                <span class="field-icon"><i class="fa fa-lock"></i></span>   
+                                            </label>
+                                </div>
+                                <!-- end section -->
+                            </div>
+                            <!-- end frm-row section -->
 
+                            <div class="section">
+                                <div class="option-group field">
+                                    <label class="option">
+                                                <input type="checkbox" name="ppTerms" value="Paypal Tems">
+                                                <span class="checkbox"></span> 
+                                                Yes, I've read and agree to the terms                
+                                            </label>
+                                </div>
+                            </div>
+                            <!-- end section -->
 
+                        </div>
+                        <!-- end payment section -->
+                    </fieldset>
 
+                    <h2>Complete</h2>
+                    <fieldset>
+                        <div class="section">
+                            <div class="notification alert-info">
+                                <p>Plese cross check your information before submitting this order</p>
+                            </div>
+                        </div>
+                        <!-- end section -->
 
-    <h1>Landlord</h1>
+                        <div class="section">
+
+                            <div class="section">
+                                <div class="option-group field">
+                                    <label class="option">
+                                                <input type="checkbox" name="generalTerms" value="General Terms">
+                                                <span class="checkbox"></span> 
+                                                Please <a href="#" class="smart-link"> read and agree </a> to our the terms                
+                                            </label>
+                                </div>
+                            </div>
+                            <!-- end section -->
+
+                        </div>
+                        <!-- end section -->
+
+                        <div class="result"></div>
+
+                    </fieldset>
+                </form>
+            </div>
+            <!-- end .form-body section -->
+
+        </div>
+        <!-- end .smart-forms section -->
+    </div>
+    <!-- end .smart-wrap section -->
 
 
 
