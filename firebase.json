@@ -1,0 +1,8 @@
+{
+  "database": {
+    "rules": "test"
+  },
+  "storage": {
+    "rules": "test"
+  }
+}
