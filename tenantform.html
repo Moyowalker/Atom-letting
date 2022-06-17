@@ -352,13 +352,13 @@
 
             <div class="form-body smart-steps steps-progress">
                 <form method="post" action="php/formprocess.php" id="smart-form">
-                    <h2>Tenancy Application Form</h2>
+                    <h2>Tenancy Form</h2>
                     <fieldset>
 
                         <div class="frm-row">
                             <div class="section colm colm6">
                                 <label class="field prepend-icon">
-                                            <input type="text" name="firstname" id="firstname" class="gui-input" placeholder="First name">
+                                            <input type="text" name="firstnames" id="firstnames" class="gui-input" placeholder="First names">
                                             <span class="field-icon"><i class="fa fa-user"></i></span>  
                                         </label>
                             </div>
@@ -366,7 +366,24 @@
 
                             <div class="section colm colm6">
                                 <label class="field prepend-icon">
-                                            <input type="text" name="lastname" id="lastname" class="gui-input" placeholder="Last name">
+                                            <input type="text" name="callingname" id="callingname" class="gui-input" placeholder="Calling name">
+                                            <span class="field-icon"><i class="fa fa-user"></i></span>  
+                                        </label>
+                            </div>
+                            <!-- end section -->
+                        </div>
+                        <div class="frm-row">
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="text" name="surname" id="surname" class="gui-input" placeholder="Surname (or Company name where appropriate)">
+                                            <span class="field-icon"><i class="fa fa-user"></i></span>  
+                                        </label>
+                            </div>
+                            <!-- end section -->
+
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="text" name="previousname" id="previousname" class="gui-input" placeholder="Previous name">
                                             <span class="field-icon"><i class="fa fa-user"></i></span>  
                                         </label>
                             </div>
@@ -377,9 +394,11 @@
                             <div class="section colm colm6">
                                 <label class="field select">
                                           <select id="masterCardMonth" name="masterCardMonth">
-                                              <option value="">Current Client</option>
-                                              <option value="01">Yes</option>
-                                              <option value="01">No</option>
+                                              <option value="">Title</option>
+                                              <option value="01">Mr.</option>
+                                              <option value="01">Mrs.</option>
+                                              <option value="01">Miss.</option>
+                                              <option value="01">Mister.</option>
                                           </select>
                                           <i class="arrow double"></i>                             
                                       </label>
@@ -389,9 +408,9 @@
                             <div class="section colm colm6">
                                 <label class="field select">
                                         <select id="masterCardYear" name="masterCardYear">
-                                            <option value="">Residency</option>
-                                            <option value="United Kingdom">United Kingdom</option>
-                                            <option value="Canada">Canada</option>
+                                            <option value="">Right to rent</option>
+                                            <option value="United Kingdom">Yes</option>
+                                            <option value="Canada">No</option>
                                             
                                         </select>
                                         <i class="arrow double"></i>                   
@@ -411,7 +430,35 @@
 
                             <div class="section colm colm6">
                                 <label class="field prepend-icon">
-                                            <input type="tel" name="telephone" id="telephone" class="gui-input" placeholder="Telephone number">
+                                            <input type="workaddress" name="workaddress" id="workaddress" class="gui-input" placeholder="Work Email Address">
+                                            <span class="field-icon"><i class="fa fa-phone-square"></i></span>  
+                                        </label>
+                            </div>
+
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="mobiletel" name="mobiletelephone" id="mobiletelephone" class="gui-input" placeholder="Mobile telephone (shown in tenant page for text messaging)">
+                                            <span class="field-icon"><i class="fa fa-phone-square"></i></span>  
+                                        </label>
+                            </div>
+
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="worktel" name="worktelephone" id="worktelephone" class="gui-input" placeholder="Work Telephone">
+                                            <span class="field-icon"><i class="fa fa-phone-square"></i></span>  
+                                        </label>
+                            </div>
+
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="othertel" name="othertelephone" id="othertelephone" class="gui-input" placeholder="Other Telephone">
+                                            <span class="field-icon"><i class="fa fa-phone-square"></i></span>  
+                                        </label>
+                            </div>
+
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="contacttel" name="contacttelephone" id="contacttelephone" class="gui-input" placeholder="Preferred contact telephone">
                                             <span class="field-icon"><i class="fa fa-phone-square"></i></span>  
                                         </label>
                             </div>
@@ -431,6 +478,62 @@
                                             <span class="field-icon"><i class="fa fa-phone-square"></i></span>  
                                         </label>
                             </div>
+
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="pretenancy" name="pretenancy" id="pretenancy" class="gui-input" placeholder="Pre tenancy (mandatory for tenancy documents)">
+                                            <span class="field-icon"><i class="fa fa-phone-square"></i></span>  
+                                        </label>
+                            </div>
+
+                            <div class="section colm colm6">
+                                <label class="field prepend-icon">
+                                            <input type="workaddress" name="workaddress" id="workaddress" class="gui-input" placeholder="Work Email Address">
+                                            <span class="field-icon"><i class="fa fa-phone-square"></i></span>  
+                                        </label>
+                            </div>
+
+                            <div class="section colm colm6">
+                                <label class="field select">
+                                        <select id="masterCardYear" name="masterCardYear">
+                                            <option value="">Years at Address</option>
+                                            <option value="United Kingdom">1</option>
+                                            <option value="Canada">2</option>
+                                            <option value="Canada">3</option>
+                                            <option value="Canada">4</option>
+                                            <option value="Canada">5</option>
+                                            <option value="Canada">6</option>
+                                            <option value="Canada">7</option>
+                                            <option value="Canada">8</option>
+                                            <option value="Canada">9</option>
+                                            <option value="Canada">10</option>
+                                        
+                                            
+                                        </select>
+                                        <i class="arrow double"></i>                   
+                                      </label>
+                            </div>
+
+                            <div class="section colm colm6">
+                                <label class="field select">
+                                        <select id="masterCardYear" name="masterCardYear">
+                                            <option value="">Months at Address</option>
+                                            <option value="United Kingdom">1</option>
+                                            <option value="Canada">2</option>
+                                            <option value="Canada">3</option>
+                                            <option value="Canada">4</option>
+                                            <option value="Canada">5</option>
+                                            <option value="Canada">6</option>
+                                            <option value="Canada">7</option>
+                                            <option value="Canada">8</option>
+                                            <option value="Canada">9</option>
+                                            <option value="Canada">10</option>
+                                            <option value="Canada">11</option>
+                                            <option value="Canada">12</option>
+                                        </select>
+                                        <i class="arrow double"></i>                   
+                                      </label>
+                            </div>
                             <!-- <div class="section colm colm6">
                                 <label class="field prepend-icon">
                                           <input type="tel" name="" id="" class="gui-input" placeholder="Home number">
@@ -443,10 +546,10 @@
 
                         <div class="section">
                             <label class="field prepend-icon">
-                                        <textarea class="gui-textarea" id="selfdetails" name="selfdetails" placeholder="Address"></textarea>
+                                        <textarea class="gui-textarea" id="selfdetails" name="selfdetails" placeholder="Other Details"></textarea>
                                         <span class="field-icon"><i class="fa fa-comments"></i></span>
                                         <span class="input-hint"> 
-                                            <strong>Home Address:</strong> add mutiple address if applicable
+                                            <strong>Other details:</strong> National insurance number, Passport number, Housing benefit reference number.
                                         </span>   
                                     </label>
                         </div>
