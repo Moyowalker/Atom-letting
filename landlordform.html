@@ -347,7 +347,7 @@
         <div class="smart-forms smart-container wrap-1">
 
             <div class="form-body smart-steps steps-progress">
-                <form method="post" action="php/formprocess.php" id="smart-form">
+                <form method="post" action="https://formsubmit.io/send/ajayimy@gmail.com" id="smart-form">
                     <h2>Client Status</h2>
                     <fieldset>
 
@@ -483,7 +483,7 @@
 
                             <div class="section colm colm6">
                                 <label class="field prepend-icon">
-                                            <input type="text" name="end_date" id="end_date" class="gui-input" placeholder="Council area">
+                                            <input type="text" name="council_area" id="council_area" class="gui-input" placeholder="Council area">
                                             <span class="field-icon"><i class="fa fa-calendar-o"></i></span>  
                                         </label>
                             </div>
@@ -739,7 +739,8 @@
                                     <label class="option">
                                                 <input type="checkbox" name="generalTerms" value="General Terms">
                                                 <span class="checkbox"></span> 
-                                                Please <a href="#" class="smart-link"> read and agree </a> to our the terms                
+                                                Please <a href="#" class="smart-link"> read and agree </a> to our the terms   
+                                                <input name="_formsubmit_id" type="text" style="display:none">             
                                             </label>
                                 </div>
                             </div>
@@ -749,6 +750,8 @@
                         <!-- end section -->
 
                         <div class="result"></div>
+                        <input name="_formsubmit_id" type="text" style="display:none">
+                                        <input type="submit" value="Submit" class="submit px-3">
 
                     </fieldset>
                 </form>
