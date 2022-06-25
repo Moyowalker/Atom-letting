@@ -18,3 +18,5 @@ const search = () => {
         }
     }
 }
+
+console.log("I am working perfectly");

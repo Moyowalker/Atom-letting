@@ -43,14 +43,17 @@
                         <a href="#"><span class="icon-pinterest"></span></a>
                     </p>
                 </div>
-                <li class="nav-item dropdown">
+
+                <div id="google_translate_element"></div>
+
+                <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"></span> English</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown09">
                         <a class="dropdown-item" href="#cn"><span class="flag-icon flag-icon-cn"> </span>Mandarin Chinese</a>
                         <a class="dropdown-item" href="#in"><span class="flag-icon flag-icon-in"> </span>  Hindustani</a>
                         <a class="dropdown-item" href="#es"><span class="flag-icon flag-icon-es"> </span>  Spanish</a>
                     </div>
-                </li>
+                </li> -->
                 <div class="col d-flex justify-content-end">
                     <p class="num"><span class="icon-phone"></span> + 1700 12345 6789</p>
                 </div>
@@ -163,6 +166,8 @@
             </div>
         </div>
     </div>
+
+
 
     <div class="main-block pb-8 pb-lg-17 bg-default-6">
         <div class="container">
@@ -343,6 +348,36 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.FloatPosition.none}, 'google_translate_element');
+        }
+    
+        function triggerHtmlEvent(element, eventName) {
+          var event;
+          if (document.createEvent) {
+            event = document.createEvent('HTMLEvents');
+            event.initEvent(eventName, true, true);
+            element.dispatchEvent(event);
+          } else {
+            event = document.createEventObject();
+            event.eventType = eventName;
+            element.fireEvent('on' + event.eventType, event);
+          }
+        }
+    
+        jQuery('.lang-select').click(function() {
+          var theLang = jQuery(this).attr('data-lang');
+          jQuery('.goog-te-combo').val(theLang);
+    
+          //alert(jQuery(this).attr('href'));
+          window.location = jQuery(this).attr('href');
+          location.reload();
+    
+        });
+      </script>
+    <script type="text/javascript" src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
         <div class="container">
@@ -417,6 +452,20 @@
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
+    <!-- <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                defaultLanguage: 'en'
+            })
+        }
+    </script> -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en', defaultLanguage: "en", includedLanguage: "cn, it, bn, es, fr", multilanguagePage: "true"}, "google_translate_element", 'google_translate_element');
+        }
+    </script>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
