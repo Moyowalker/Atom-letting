@@ -564,10 +564,14 @@
 
                         <div class="frm-row">
                             <div class="section colm colm6">
-                                <label class="field prepend-icon">
-                                            <input type="text" name="project_title" id="project_title" class="gui-input" placeholder="Landlord owned property">
-                                            <span class="field-icon"><i class="fa fa-line-chart"></i></span>  
-                                        </label>
+                                <label class="field select">
+                                    <select id="ppState" name="ppState">
+                                        <option value="">Landlord owned property</option>
+                                        <option value="AL">Yes</option>
+                                        <option value="AK">No</option>
+                                    </select>
+                                    <i class="arrow double"></i>
+                                </label>
                             </div>
                             <!-- end section -->
 
@@ -1185,10 +1189,14 @@
 
                             <div class="frm-row">
                                 <div class="section colm colm6">
-                                    <label class="field prepend-icon">
-                                                <input type="password" name="ppPass" id="ppPass" class="gui-input" placeholder="Choose a Payment method">
-                                                <span class="field-icon"><i class="fa fa-lock"></i></span>  
-                                            </label>
+                                    <label class="field select">
+                                        <select id="ppState" name="ppState">
+                                            <option value="">Choose a Payment method</option>
+                                            <option value="AL">Bank Transfer</option>
+                                            <option value="AK">Cash</option>
+                                        </select>
+                                        <i class="arrow double"></i>
+                                    </label>
                                 </div>
                                 <!-- end section -->
 
