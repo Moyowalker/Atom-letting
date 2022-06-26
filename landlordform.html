@@ -684,10 +684,14 @@
 
                             <div class="frm-row">
                                 <div class="section colm colm6">
-                                    <label class="field prepend-icon">
-                                                <input type="password" name="ppPass" id="ppPass" class="gui-input" placeholder="Choose a Payment method">
-                                                <span class="field-icon"><i class="fa fa-lock"></i></span>  
-                                            </label>
+                                    <label class="field select">
+                                        <select id="ppState" name="ppState">
+                                            <option value="">Choose a Payment method</option>
+                                            <option value="AL">Bank Transfer</option>
+                                            <option value="AK">Cash</option>
+                                        </select>
+                                        <i class="arrow double"></i>
+                                    </label>
                                 </div>
                                 <!-- end section -->
 
@@ -742,7 +746,7 @@
                         </div>
                         <!-- end section -->
 
-                        <div class="result"></div>
+                        <div class="result">Submitted</div>
                         <input name="_formsubmit_id" type="text" style="display:none">
                         <input honeypot="_formsubmit_id" type="hidden">
                         <input type="submit" value="Submit" class="submit px-3">
